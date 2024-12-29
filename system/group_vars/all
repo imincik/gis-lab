@@ -49,8 +49,8 @@
 
 # Ubuntu version. GIS.lab supports only one Ubuntu version at time. Don't try to
 # change this value !
-GISLAB_UBUNTU_VERSION: jammy
-GISLAB_UBUNTU_VERSION_NUMBER: 22.04
+GISLAB_UBUNTU_VERSION: noble
+GISLAB_UBUNTU_VERSION_NUMBER: 24.04
 
 
 # *************************************************************************** #
