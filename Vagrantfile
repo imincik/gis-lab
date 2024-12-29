@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 #  config.vm.box_url = BOX_URL
   config.vm.synced_folder '.', '/vagrant', disabled: true
   config.ssh.forward_agent = true
-  config.disksize.size = '40GB'
+#  config.disksize.size = '40GB'
 
   # provisioning
   config.vm.define :gislab_vagrant_noble do |server|
