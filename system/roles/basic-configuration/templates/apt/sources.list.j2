@@ -12,7 +12,7 @@ deb http://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }}-securit
 deb http://archive.canonical.com/ubuntu {{ ansible_distribution_release }} partner
 
 ###### GIS.lab repository
-deb http://ppa.launchpad.net/gislab-npo/development/ubuntu {{ ansible_distribution_release }} main
+deb http://ppa.launchpad.net/gislab-npo/production/ubuntu {{ ansible_distribution_release }} main
 
 {% if GISLAB_APT_CUSTOM_REPOSITORIES %}
 #### Custom repositories
