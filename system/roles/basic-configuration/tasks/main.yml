@@ -108,21 +108,11 @@
 
 
 ### APT
-- name: Remove third party apt repositories
-  file:
-    dest: /etc/apt/sources.list.d
-    state: absent
-
 - name: Add GIS.lab PPA signing key
   apt_key:
     keyserver: keyserver.ubuntu.com
     id: 851ACD2441E31BA5D303F304AA6C9487559C7A48
     state: present
-
-- name: Configure apt repositories
-  template:
-    src: apt/sources.list.j2
-    dest: /etc/apt/sources.list
 
 
 - name: Configure Apt cache proxy server
