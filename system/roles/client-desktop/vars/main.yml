@@ -32,7 +32,7 @@ packages_base:
   - genisoimage
   - initramfs-tools
   - libnss-ldap
-  - libpam-cracklib
+  - libpam-pwquality
   - libsasl2-modules
   - mkelfimage
   - munin-node
