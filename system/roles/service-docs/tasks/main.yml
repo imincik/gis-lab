@@ -19,6 +19,7 @@
   pip:
     name:
       - sphinxcontrib-images
+    break_system_packages: yes
 
 - name: Download GIS.lab documentation
   git:
