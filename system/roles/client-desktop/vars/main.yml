@@ -23,7 +23,6 @@ packages_virtualbox:
 packages_base:
   # list of basic server packages (installed with recommended packages)
   - acpid
-  - acpi-support
   - apt-show-versions
   - bc
   - busybox-initramfs
@@ -34,7 +33,6 @@ packages_base:
   - libnss-ldap
   - libpam-pwquality
   - libsasl2-modules
-  - mkelfimage
   - munin-node
   - nbd-client
   - nfs-common
@@ -116,7 +114,6 @@ packages_desktop:
   - xfce4-settings
   - xfce4-taskmanager
   - xfce4-terminal
-  - xfce4-volumed
   - xfce4-xkb-plugin
   - xfdesktop4
   - xfwm4
@@ -157,7 +154,7 @@ packages_office:
   - keepassx
   - libreoffice
   - libreoffice-calc
-  - libreoffice-gtk
+  - libreoffice-gtk3
   - libreoffice-writer
   - mc
   - mutt
@@ -179,7 +176,7 @@ packages_office:
   - rst2pdf
   - system-config-printer
   - sshfs
-  - vim-gtk
+  - vim-gtk3
   - vlc
   - x11vnc
   - xtightvncviewer
@@ -187,6 +184,7 @@ packages_office:
 
 packages_lab:
   # list of GIS.lab client GIS packages (installed without recommended packages)
+  - eodag
   - gdal-bin
   - git
   - grass
@@ -232,7 +230,6 @@ packages_lab:
 
 packages_lab_pip:
   # list of GIS.lab client GIS PIP packages
-  - sentinelsat
   - pymodis
 
 packages_worker:
@@ -251,14 +248,13 @@ packages_remove:
   # the reason why package was installed.
   - network-manager
   - network-manager-pptp
-  - nplan
   - netplan.io
   - resolvconf
   - xscreensaver
 
-nvidia_driver_version: 525
+nvidia_driver_version: 550
 
-pycharm_version: 2022.3.2
+pycharm_version: 2024.3.1.1
 
 # -o Dpkg::Options::="--force-confold" ???
 apt_get_opts: "--assume-yes --force-yes"

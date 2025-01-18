@@ -319,7 +319,7 @@
     apt-get --no-install-recommends {{ apt_get_opts }} install {{ packages_lab|join(' ') }}
     &&
     chroot {{ root_dir }}/root
-    pip3 install {{ packages_lab_pip|join(' ') }}
+    pip3 install {{ packages_lab_pip|join(' ') }} --break-system-packages
   args:
     executable: /bin/bash
   when: GISLAB_SUITE == 'lab'
