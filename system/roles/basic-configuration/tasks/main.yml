@@ -114,6 +114,11 @@
     id: 851ACD2441E31BA5D303F304AA6C9487559C7A48
     state: present
 
+- name: Add GIS.lab PPA
+  apt_repository:
+    repo: "ppa:gislab-npo/development"
+    state: present
+
 
 - name: Configure Apt cache proxy server
   template:
