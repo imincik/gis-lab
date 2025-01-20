@@ -143,7 +143,7 @@ GISLAB_APT_CUSTOM_REPOSITORIES:
 # See http://gisquick.org.
 # * no:  do not integrate Gisquick
 # * yes: integrate Gisquick
-GISLAB_GISQUICK_INTEGRATION: no
+GISLAB_GISQUICK_INTEGRATION: yes
 
 
 
