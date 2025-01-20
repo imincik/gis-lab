@@ -119,6 +119,12 @@
     repo: "ppa:gislab-npo/development"
     state: present
 
+- name: Symlink trusted.gpg to /etc/apt/trusted.gpg.d directory
+  file:
+    src: /etc/apt/trusted.gpg
+    dest: /etc/apt/trusted.gpg.d/trusted.gpg
+    state: link
+
 
 - name: Configure Apt cache proxy server
   template:
