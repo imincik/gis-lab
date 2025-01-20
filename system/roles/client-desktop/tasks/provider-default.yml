@@ -16,7 +16,8 @@
   shell: gislab-client-image > /dev/null
   args:
     executable: /bin/bash
-
+  environment:
+    PATH: "{{ GISLAB_PATH_ADMIN }}:{{ ansible_env.PATH }}"
 
 - meta: flush_handlers
 
