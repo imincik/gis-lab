@@ -334,7 +334,7 @@
     src: "https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz"
     dest: "{{ root_dir }}/root/opt/"
     remote_src: yes
-  when: GISLAB_SUITE == 'lab' and not not pycharm_dir.stat.exists
+  when: GISLAB_SUITE == 'lab' and not pycharm_dir.stat.exists
 
 - name: Create PyCharm version-independent executable
   file:
