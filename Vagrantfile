@@ -32,8 +32,10 @@ end
 
 
 # Vagrant box
-BOX = "%s-canonical" % [CONFIG["GISLAB_UBUNTU_VERSION"]]
-BOX_URL = "https://cloud-images.ubuntu.com/%s/current/%s-server-cloudimg-amd64-vagrant.box" % [CONFIG["GISLAB_UBUNTU_VERSION"], CONFIG["GISLAB_UBUNTU_VERSION"]]
+#BOX = "%s-canonical" % [CONFIG["GISLAB_UBUNTU_VERSION"]]
+BOX = "bento/ubuntu-24.04"
+#BOX_URL = "https://cloud-images.ubuntu.com/%s/current/%s-server-cloudimg-amd64-vagrant.box" % [CONFIG["GISLAB_UBUNTU_VERSION"], CONFIG["GISLAB_UBUNTU_VERSION"]]
+#BOX_URL = "bento/ubuntu-24.04"
 
 # GIS.lab configuration for Vagrant
 # super user password
@@ -47,13 +49,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ENV['PYTHONIOENCODING'] = "utf-8"
 
   config.vm.box = BOX
-  config.vm.box_url = BOX_URL
+#  config.vm.box_url = BOX_URL
   config.vm.synced_folder '.', '/vagrant', disabled: true
   config.ssh.forward_agent = true
-  config.disksize.size = '40GB'
+#  config.disksize.size = '40GB'
 
   # provisioning
-  config.vm.define :gislab_vagrant_jammy do |server|
+  config.vm.define :gislab_vagrant_noble do |server|
     server.vm.network "public_network", ip: CONFIG['GISLAB_NETWORK'] + ".5"
 
     # VirtualBox configuration

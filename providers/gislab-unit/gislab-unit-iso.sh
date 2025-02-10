@@ -86,8 +86,8 @@ fi
 mkdir -p $MOUNT_DIR
 sudo mount -o loop $SRC_IMAGE $MOUNT_DIR
 
-if [ ! -d "$MOUNT_DIR/dists/jammy" ]; then
-    echo "Invalid Ubuntu ISO image file. Ubuntu 22.04 Server ISO is required."
+if [ ! -d "$MOUNT_DIR/dists/noble" ]; then
+    echo "Invalid Ubuntu ISO image file. Ubuntu 24.04 Server ISO is required."
     umount $MOUNT_DIR
     exit 1
 fi
@@ -153,29 +153,22 @@ find -type f -print0 \
 
 cd $WORK_DIR
 
-# taken from https://askubuntu.com/questions/1403546/ubuntu-22-04-build-iso-both-mbr-and-efi
-#  extract the MBR template for --grub2-mbr (x86 code)
-dd if=$SRC_IMAGE bs=1 count=432 of=root/boot_hybrid.img
-#  the EFI partition is not a data file inside the ISO any more.
-#  7129428d-7137923d : 7137923 - 7129428 + 1 = 8496
-dd if=$SRC_IMAGE bs=512 skip=2871452 count=8496 of=root/efi.img
-#  pack ISO...
-xorriso -as mkisofs -r \
-        -V 'GIS.lab Base System' \
-        -o gislab-base-system-${ISO_ID}.iso \
-        --grub2-mbr root/boot_hybrid.img \
-        -partition_offset 16 \
-        --mbr-force-bootable \
-        -append_partition 2 28732ac11ff8d211ba4b00a0c93ec93b root/efi.img \
-        -appended_part_as_gpt \
-        -iso_mbr_part_type a2a0d0ebe5b9334487c068b6b72699c7 \
-        -c '/boot.catalog' \
-        -b '/boot/grub/i386-pc/eltorito.img' \
-        -no-emul-boot -boot-load-size 4 -boot-info-table --grub2-boot-info \
-        -eltorito-alt-boot \
-        -e '--interval:appended_partition_2:::' \
-        -no-emul-boot \
-        root/
+# Inspired by https://github.com/YasuhiroABE/ub-autoinstall-iso/blob/24.04.1/Makefile
+GENISO_START_SECTOR=$(sudo LANG=C fdisk -l $SRC_IMAGE | grep iso2 | cut -d' ' -f2)
+GENISO_END_SECTOR=$(sudo LANG=C fdisk -l $SRC_IMAGE | grep iso2 | cut -d' ' -f3)
+
+xorriso -as mkisofs \
+        -volid 'GISLAB' \
+	-output gislab-base-system-${ISO_ID}.iso \
+	-eltorito-boot boot/grub/i386-pc/eltorito.img \
+	-eltorito-catalog /boot.catalog -no-emul-boot \
+	-boot-load-size 4 -boot-info-table -eltorito-alt-boot \
+	-no-emul-boot -isohybrid-gpt-basdat \
+	-append_partition 2 28732ac11ff8d211ba4b00a0c93ec93b \
+        --interval:local_fs:${GENISO_START_SECTOR}d-${GENISO_END_SECTOR}d::"${SRC_IMAGE}" \
+	-e '--interval:appended_partition_2_start_1782357s_size_8496d:all::' \
+	--grub2-mbr --interval:local_fs:0s-15s:zero_mbrpt,zero_gpt:"${SRC_IMAGE}" \
+	root/
 
 # create meta file
 cat << EOF >> $WORK_DIR/gislab-base-system-${ISO_ID}.meta

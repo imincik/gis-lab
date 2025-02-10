@@ -23,6 +23,8 @@
     -m "{{ GISLAB_ADMIN_EMAIL }}"
     gislab
   when: admin_account_status.stdout == 'GISLAB-DOES-NOT-EXIST'
+  environment:
+    PATH: "{{ GISLAB_PATH_ADMIN }}:{{ ansible_env.PATH }}"
 
 
 - name: Create SSH directory for GIS.lab administrator user account
@@ -67,5 +69,7 @@
     -p "{{ GISLAB_ADMIN_PASSWORD }}"
     gislab
   when: GISLAB_ADMIN_PASSWORD != ""
+  environment:
+    PATH: "{{ GISLAB_PATH_ADMIN }}:{{ ansible_env.PATH }}"
 
 # vim: set ts=8 sts=2 sw=2 et:

@@ -104,8 +104,11 @@ autoinstall:
           chown -R ubuntu:ubuntu /home/ubuntu/.ssh
     runcmd:
       - /bin/bash /run/tmpfiles.d/authorized_keys.sh
+  packages:
+    - openssh-server
   late-commands:
     - cp /cdrom/ssh_key.pub /target/root/
     - 'sed -i "s/%sudo.*/%sudo	ALL=(ALL)NOPASSWD: ALL/" /target/etc/sudoers'
     - 'sed -i "s/\(GRUB_CMDLINE_LINUX_DEFAULT=\).*/\1\"nomodeset\"/g" /etc/default/grub'
     - curtin in-target --target=/target -- update-grub
+    - curtin in-target --target=/target -- systemctl enable ssh

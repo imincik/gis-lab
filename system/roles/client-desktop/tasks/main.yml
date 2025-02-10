@@ -319,17 +319,22 @@
     apt-get --no-install-recommends {{ apt_get_opts }} install {{ packages_lab|join(' ') }}
     &&
     chroot {{ root_dir }}/root
-    pip3 install {{ packages_lab_pip|join(' ') }}
+    pip3 install {{ packages_lab_pip|join(' ') }} --break-system-packages
   args:
     executable: /bin/bash
   when: GISLAB_SUITE == 'lab'
+
+- name: Check PyCharm IDE
+  stat:
+    path: "{{ root_dir }}/root/opt/pycharm-community-{{ pycharm_version }}"
+  register: pycharm_dir
 
 - name: Install PyCharm IDE
   unarchive:
     src: "https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz"
     dest: "{{ root_dir }}/root/opt/"
     remote_src: yes
-  when: GISLAB_SUITE == 'lab'
+  when: GISLAB_SUITE == 'lab' and not pycharm_dir.stat.exists
 
 - name: Create PyCharm version-independent executable
   file:
