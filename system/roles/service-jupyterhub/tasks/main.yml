@@ -21,6 +21,7 @@
   pip:
     name:
       - jupyterhub-ldapauthenticator==1.0
+    break_system_packages: yes
 
 - name: Configure JupyterHub service
   template:
