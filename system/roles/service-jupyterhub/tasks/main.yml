@@ -13,6 +13,7 @@
   apt:
     name:
       - jupyterhub
+      - grass
     force: yes
     install_recommends: no
     state: latest
@@ -22,6 +23,20 @@
     name:
       - jupyterhub-ldapauthenticator==1.0
     break_system_packages: yes
+
+- name: Load Python kernel configuration
+  include_vars:
+    file: /usr/share/jupyter/kernels/python3/kernel.json
+    name: imported_var
+      
+- name: Update Python kernel configuration
+  set_fact:
+    imported_var: "{{ imported_var | default([]) | combine({ 'env': {'PYTHONPATH': '${PYTHONPATH}:/usr/lib/grass{{ grass_version }}/etc/python/'}}) }}"
+
+- name: Write Python kernel configuration
+  copy: 
+    content: "{{ imported_var | to_nice_json }}" 
+    dest: /usr/share/jupyter/kernels/python3/kernel.json
 
 - name: Configure JupyterHub service
   template:
