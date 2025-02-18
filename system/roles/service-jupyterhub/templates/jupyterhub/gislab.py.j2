@@ -1,0 +1,5 @@
+c.JupyterHub.bind_url = 'http://:{{ jupyterhub_port }}'
+c.JupyterHub.authenticator_class = 'ldapauthenticator.LDAPAuthenticator'
+c.LDAPAuthenticator.server_address = 'ldapi:///var/run/slapd/ldapi'
+c.LDAPAuthenticator.use_ssl = False
+c.LDAPAuthenticator.bind_dn_template = ["uid={username},ou=People,dc=gis,dc=lab"]

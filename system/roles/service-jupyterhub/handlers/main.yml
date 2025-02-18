@@ -1,0 +1,8 @@
+---
+
+- name: service jupyterhub restart
+  service:
+    name: jupyterhub
+    state: restarted
+
+# vim: set ts=8 sts=2 sw=2 et:

@@ -1,0 +1,15 @@
+[Unit]
+
+[Service]
+User=root
+Restart=always
+WorkingDirectory=/var/lib/jupyterhub
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ExecStart=/usr/bin/python3 -m jupyterhub.app -f /etc/jupyterhub/config/jupyterhub_config.d/gislab.py --upgrade-db
+
+
+[Install]
+WantedBy=multi-user.target

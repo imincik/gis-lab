@@ -46,6 +46,7 @@
     }
     - { role: service-docs, tags: ['service-docs'] }
     - { role: service-docker, tags: ['service-docker'] }
+    - { role: service-jupyterhub, tags: ['service-jupyterhub'] }
     - {
       role: service-gisquick,
       tags: ['service-gisquick'],
