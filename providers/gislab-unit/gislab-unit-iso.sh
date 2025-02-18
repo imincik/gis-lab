@@ -86,7 +86,7 @@ fi
 mkdir -p $MOUNT_DIR
 sudo mount -o loop $SRC_IMAGE $MOUNT_DIR
 
-if [ ! -d "$MOUNT_DIR/dists/jammy" ]; then
+if [ ! -d "$MOUNT_DIR/dists/noble" ]; then
     echo "Invalid Ubuntu ISO image file. Ubuntu 22.04 Server ISO is required."
     umount $MOUNT_DIR
     exit 1
@@ -161,7 +161,7 @@ dd if=$SRC_IMAGE bs=1 count=432 of=root/boot_hybrid.img
 dd if=$SRC_IMAGE bs=512 skip=2871452 count=8496 of=root/efi.img
 #  pack ISO...
 xorriso -as mkisofs -r \
-        -V 'GIS.lab Base System' \
+        -V 'GISLAB_Base_System' \
         -o gislab-base-system-${ISO_ID}.iso \
         --grub2-mbr root/boot_hybrid.img \
         -partition_offset 16 \

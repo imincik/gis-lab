@@ -1,6 +1,6 @@
 ---
 
-postgresql_version: 14
+postgresql_version: 16
 postgresql_conf_directory: "/etc/postgresql/{{ postgresql_version }}"
 postgresql_tune_db_type: dw
 postgresql_tune_total_memory: "{{ ansible_memtotal_mb }}MB"

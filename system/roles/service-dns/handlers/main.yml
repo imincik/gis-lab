@@ -6,4 +6,10 @@
     enabled: no
     state: stopped
 
+- name: service systemd-resolved restart
+  service:
+    name: systemd-resolved.service
+    state: restarted
+    enabled: yes
+
 # vim: set ts=8 sts=2 sw=2 et:
